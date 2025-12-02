@@ -89,7 +89,7 @@ function calculerROI() {
     resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, 100);
 
-  // Tracking HubSpot
+  // Tracking HubSpot (Analytics)
   if (typeof window._hsq !== 'undefined') {
     window._hsq.push(['trackCustomBehavioralEvent', {
       name: 'calculateur_roi_utilise',
@@ -100,8 +100,33 @@ function calculerROI() {
       }
     }]);
   }
+
+  // === TRANSFERT VERS LE FORMULAIRE DE CONTACT HUBSPOT ===
+  // Cette partie remplit les champs cachés créés dans HubSpot
+  
+  const donneesATransferer = {
+    'trafic_visiteurs_mensuel': trafic,
+    'gain_mensuel_estime': Math.round(gainMensuel),
+    'roi_previsionnel_12_mois': Math.round(roi12),
+    'budget_investissement_estime': investissement
+  };
+
+  console.log('Tentative de transfert vers le formulaire:', donneesATransferer);
+
+  for (const [nomInterne, valeur] of Object.entries(donneesATransferer)) {
+    // Cherche l'input hidden correspondant
+    const champ = document.querySelector(`input[name="${nomInterne}"]`);
+    
+    if (champ) {
+      champ.value = valeur;
+      // Déclenche les événements pour que HubSpot détecte le changement
+      champ.dispatchEvent(new Event('input', { bubbles: true }));
+      champ.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }
 }
 
+// Fonctions utilitaires de formatage
 function formatEuro(value) {
   return new Intl.NumberFormat('fr-FR', {
     style: 'currency',
