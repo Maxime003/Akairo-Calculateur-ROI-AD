@@ -30,7 +30,7 @@ function calculerImpactCA() {
   // Gains
   const gainMensuel = caApres - caAvant;
   const gainAnnuel = gainMensuel * 12;
-  const gainPourcent = ((caApres - caAvant) / caAvant) * 100;
+  //const gainPourcent = ((caApres - caAvant) / caAvant) * 100;
 
   // === AFFICHAGE ===
   document.getElementById('trafic_avant').textContent = formatNumber(trafic) + ' visiteurs';
@@ -45,7 +45,7 @@ function calculerImpactCA() {
 
   document.getElementById('gain_mensuel').textContent = formatEuro(gainMensuel);
   document.getElementById('gain_annuel').textContent = formatEuro(gainAnnuel);
-  document.getElementById('gain_percent').textContent = '+' + gainPourcent.toFixed(1) + '% de CA';
+  //document.getElementById('gain_percent').textContent = '+' + gainPourcent.toFixed(1) + '% de CA';
 
   // Affichage de la section résultats
   const resultsSection = document.getElementById('results');
