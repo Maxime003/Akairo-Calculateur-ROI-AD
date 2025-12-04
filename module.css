@@ -147,7 +147,6 @@
 
 .metric {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px solid #E8E8E8;
@@ -164,12 +163,16 @@
 .metric-label {
   font-size: 14px;
   color: #666666;
+  flex: 0 0 40%; /* Le texte prend toujours 50% de la largeur */
+  width: 50%;
+  
 }
 
 .metric-value {
   font-size: 18px;
   font-weight: 600;
   color: #1A1A1A;
+  margin-left: auto; /* Pousse l'élément tout à droite */
 }
 
 .metric-value.positive {
@@ -184,7 +187,7 @@
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 12px;
-  margin-left: 8px;
+  /*margin-left: 8px;*/
 }
 
 .gain-mensuel {
