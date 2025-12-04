@@ -256,7 +256,6 @@
   width: 100%;
   opacity: 0.3; /* On voit à peine les chiffres derrière */
   filter: blur(3px);
-  transform: scale(1.1);
 }
 
 .fake-row {
