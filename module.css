@@ -302,10 +302,10 @@
   padding: 14px 28px;
   font-size: 16px;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   background: #DE0B19; /* Noir pour différencier du rouge "Calculer" */
   border-radius: 6px;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: all 0.3s ease;
 }
 
@@ -315,5 +315,5 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   border: 1px solid #DE0B19;
   border-radius: 7px;
-  color: #0A0B0B;
+  color: #0A0B0B !important;
 }
