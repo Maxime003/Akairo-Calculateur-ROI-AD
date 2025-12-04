@@ -214,140 +214,101 @@
   font-weight: 500;
 }
 
-.roi-section {
-  background: #F8F9FA;
-  padding: 32px;
-  border-radius: 8px;
-  margin-bottom: 32px;
+/* ... Gardez tout votre CSS existant du début jusqu'à .gain-mensuel ... */
+
+.gain-yearly-label {
+  margin-top: 8px;
+  font-size: 16px;
+  opacity: 0.9;
 }
 
-.roi-section h4 {
-  font-size: 22px;
-  font-weight: 600;
-  text-align: center;
-  margin: 0 0 24px 0;
-}
-
-.roi-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.roi-card {
-  background: #FFFFFF;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  border: 2px solid #E0E0E0;
-  transition: all 0.3s ease;
-}
-
-.roi-card:hover {
-  border-color: #FF0000;
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.roi-label {
-  display: block;
-  font-size: 13px;
-  color: #666666;
-  margin-bottom: 8px;
-}
-
-.roi-value {
-  display: block;
-  font-size: 24px;
-  font-weight: 700;
-  color: #FF0000;
-}
-
-.benefice-annuel {
-  text-align: center;
-  padding: 20px;
-  background: #FFFFFF;
-  border-radius: 8px;
-  border: 2px solid #FF0000;
-}
-
-.benefice-label {
-  display: block;
-  font-size: 14px;
-  color: #666666;
-  margin-bottom: 8px;
-}
-
-.benefice-value {
-  display: block;
-  font-size: 32px;
-  font-weight: 700;
-  color: #FF0000;
-}
-
-.benefits-section {
-  background: #F8F9FA;
-  padding: 28px;
-  border-radius: 8px;
-  margin-bottom: 32px;
-}
-
-.benefits-section h4 {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 16px 0;
-}
-
-.benefits-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.benefits-list li {
-  font-size: 15px;
-  padding: 8px 0;
-}
-
-.cta-section {
-  text-align: center;
-  padding: 32px;
-  background: linear-gradient(135deg, #1A1A1A 0%, #333333 100%);
+/* === NOUVELLE SECTION ROI FLOUTÉE (TEASER) === */
+.roi-teaser-section {
+  position: relative;
+  background: #F0F0F0;
   border-radius: 12px;
+  padding: 40px 20px;
+  margin-top: 32px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid #E0E0E0;
 }
 
-.cta-text {
-  font-size: 18px;
-  color: #FFFFFF;
-  margin: 0 0 20px 0;
+/* L'arrière-plan flou qui suggère des données */
+.blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px); /* L'effet de flou */
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* On ne peut pas sélectionner le texte flou */
 }
 
-.btn-cta {
+.fake-metrics {
+  width: 100%;
+  opacity: 0.3; /* On voit à peine les chiffres derrière */
+  filter: blur(3px);
+  transform: scale(1.1);
+}
+
+.fake-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px dashed #ccc;
+}
+
+/* Le contenu net au premier plan */
+.teaser-content {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.teaser-content h4 {
+  font-size: 22px;
+  color: #1A1A1A;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+.teaser-content p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.btn-cta-roi {
   display: inline-block;
-  padding: 16px 40px;
-  font-size: 18px;
+  padding: 14px 28px;
+  font-size: 16px;
   font-weight: 600;
   color: #FFFFFF;
-  background: #FF0000;
+  background: #1A1A1A; /* Noir pour différencier du rouge "Calculer" */
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
-.btn-cta:hover {
-  background: #CC0000;
+.btn-cta-roi:hover {
+  background: #FF0000; /* Devient rouge au survol */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
-}
-
-@media (max-width: 768px) {
-  .akairo-calculator-wrapper { padding: 24px; margin: 20px; }
-  .results-grid { grid-template-columns: 1fr; }
-  .roi-grid { grid-template-columns: repeat(2, 1fr); }
-  .benefits-list { grid-template-columns: 1fr; }
-  .gain-value { font-size: 36px; }
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
