@@ -63,7 +63,7 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #FF0000;
+  border-color: #DE0B19;
   box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
 }
 
@@ -81,7 +81,7 @@
   font-size: 18px;
   font-weight: 600;
   color: #FFFFFF;
-  background: #FF0000;
+  background: #DE0B19;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -133,7 +133,7 @@
 
 .result-card.situation-apres {
   background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%);
-  border-color: #FF0000;
+  border-color: #DE0B19;
 }
 
 .result-card h4 {
@@ -173,12 +173,12 @@
 }
 
 .metric-value.positive {
-  color: #FF0000;
+  color: #DE0B19;
 }
 
 .metric-badge {
   display: inline-block;
-  background: #FF0000;
+  background: #DE0B19;
   color: #FFFFFF;
   font-size: 12px;
   font-weight: 600;
@@ -189,7 +189,7 @@
 
 .gain-mensuel {
   text-align: center;
-  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+  background: linear-gradient(135deg, #DE0B19 0%, #CC0000 100%);
   color: #FFFFFF;
   padding: 32px;
   border-radius: 12px;
@@ -300,14 +300,17 @@
   font-size: 16px;
   font-weight: 600;
   color: #FFFFFF;
-  background: #1A1A1A; /* Noir pour différencier du rouge "Calculer" */
+  background: #DE0B19; /* Noir pour différencier du rouge "Calculer" */
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .btn-cta-roi:hover {
-  background: #FF0000; /* Devient rouge au survol */
+  background: #ffff; /* Devient blanc au survol */
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border: 1px solid #DE0B19;
+  border-radius: 7px;
+  color: #0A0B0B;
 }
