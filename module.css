@@ -181,7 +181,7 @@
 
 .metric-badge {
   display: inline-block;
-  background: #DE0B19;
+  background: #138808;
   color: #FFFFFF;
   font-size: 12px;
   font-weight: 600;
@@ -269,6 +269,33 @@
   font-weight: bold;
   color: #333;
   border-bottom: 1px dashed #ccc;
+}
+
+.benefits-section {
+  background: #F8F9FA;
+  padding: 28px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+.benefits-section h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.benefits-list li {
+  font-size: 15px;
+  padding: 8px 0;
 }
 
 /* Le contenu net au premier plan */
