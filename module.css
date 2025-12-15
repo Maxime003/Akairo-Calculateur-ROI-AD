@@ -245,8 +245,8 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(4px); /* L'effet de flou */
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(30px); /* L'effet de flou */
+  -webkit-backdrop-filter: blur(30px);
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -258,7 +258,7 @@
 .fake-metrics {
   width: 100%;
   opacity: 0.3; /* On voit à peine les chiffres derrière */
-  filter: blur(3px);
+  filter: blur(4px);
 }
 
 .fake-row {
