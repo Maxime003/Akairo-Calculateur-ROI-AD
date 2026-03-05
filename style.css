@@ -497,7 +497,6 @@
   width: 100% !important;
   height: auto !important; /* Garde le ratio hauteur/largeur */
   max-width: 100% !important;
-  display: block !important;
 }
 
 .pdf-mode * {
@@ -547,19 +546,62 @@
   padding-bottom: 0 !important;
   height: auto !important;
 }
-/* 2. On supprime la marge basse du footer et de ses paragraphes */
-.pdf-mode .sources-footer {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+/* === BLOC CONDITIONS === */
+
+/* Style web */
+.conditions-pdf-bloc {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid #F0F0F0;
+  text-align: center;
 }
-.pdf-mode .sources-footer p:last-child {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+
+.conditions-pdf-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px;
 }
-/* 3. Sécurité supplémentaire : on force la coupure APRÈS le footer pour éviter le débordement */
-.pdf-mode .sources-footer {
-  page-break-after: avoid !important;
+.conditions-pdf-text {
+  font-size: 11px;
+  color: #999;
+  line-height: 1.6;
+  margin: 0 0 8px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
+.conditions-pdf-link {
+  font-size: 11px;
+  color: #999;
+  margin: 0 0 6px;
+}
+.conditions-pdf-link a { color: #DE0B19; text-decoration: none; }
+.conditions-pdf-link a:hover { text-decoration: underline; }
+.conditions-pdf-date { font-size: 11px; color: #BBB; font-style: italic; margin: 0; }
+
+/* Overrides PDF */
+.pdf-mode .conditions-pdf-bloc {
+  margin-top: 24px;
+  padding: 16px 20px;
+  border-top: 2px solid #DE0B19;
+  background: #FAFAFA;
+  border-radius: 6px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.pdf-mode .conditions-pdf-title {
+  font-size: 9px; color: #1A1A1A;
+}
+.pdf-mode .conditions-pdf-text {
+  font-size: 8px; max-width: none; margin-left: 0; margin-right: 0;
+}
+.pdf-mode .conditions-pdf-link { font-size: 8px; }
+.pdf-mode .conditions-pdf-date { font-size: 7px; }
+
+
 /* CGU */
 .cgu-wrapper {
   margin-bottom: 16px;

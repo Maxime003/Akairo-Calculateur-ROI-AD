@@ -5,6 +5,9 @@
 // Variable globale pour le graphique Chart.js
 let roiChartInstance = null;
 
+const INVESTISSEMENT_ECRAN = 2500;   // € — prix indicatif écran vitrine
+const LICENCE_MENSUELLE = 29;        // € — licence IDPLAY mensuelle
+
 function calculerImpactCA() {
   const trafic = parseFloat(document.getElementById('trafic').value) || 0;
   const ventes = parseFloat(document.getElementById('ventes').value) || 0;
@@ -105,6 +108,28 @@ function calculerImpactCA() {
   setTimeout(function() {
     resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, 100);
+
+  // === MISE À JOUR DU TEASER ===
+  // Hypothèse : écran à 2 500€ HT + licence 29€/mois
+  const licenceAnnuelle = LICENCE_MENSUELLE * 12;
+  const gainNetAnnuel = (deltaCA * 12) - licenceAnnuelle;
+  const roi1an = (gainNetAnnuel / INVESTISSEMENT_ECRAN) * 100;
+  const gainNetMensuel = deltaCA - LICENCE_MENSUELLE;
+  let pointMort;
+  if (gainNetMensuel <= 0) {
+    pointMort = '> 5 ans';
+  } else {
+    const mois = Math.ceil(INVESTISSEMENT_ECRAN / gainNetMensuel);
+    pointMort = mois > 60 ? '> 5 ans' : mois + ' mois';
+  }
+  const caNet1an = gainNetAnnuel;
+
+  const fakeVals = document.querySelectorAll('.fake-val');
+  if (fakeVals.length >= 3) {
+    fakeVals[0].textContent = roi1an < 0 ? 'N/A' : '+' + Math.round(roi1an) + '%';
+    fakeVals[1].textContent = pointMort;
+    fakeVals[2].textContent = caNet1an < 0 ? 'N/A' : formatEuro(caNet1an);
+  }
 
   // === TRACKING & TRANSFERT ===
   const donneesATransferer = {
@@ -207,6 +232,14 @@ function downloadPDF() {
   const btn = document.querySelector('.btn-download-pdf');
   
   // 1. Préparation visuelle
+  const conditionsDate = document.getElementById('conditions-date');
+  if (conditionsDate) {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('fr-FR', {
+      day: '2-digit', month: 'long', year: 'numeric'
+    });
+    conditionsDate.textContent = 'Simulation générée le ' + dateStr;
+  }
   element.classList.add('pdf-mode');
   
   // Gestion propre des sauts de page
