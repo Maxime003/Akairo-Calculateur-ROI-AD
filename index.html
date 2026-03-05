@@ -13,23 +13,35 @@
   <div class="calculator-form">
     <div class="form-group">
       <label for="trafic">Trafic mensuel actuel (nombre de visiteurs/mois)</label>
-      <input type="number" id="trafic" name="trafic" placeholder="Ex: 1000" min="0">
+      <input type="number" id="trafic" name="trafic" placeholder="Ex: 1000" value="1000" min="0">
       <span class="helper-text">Nombre de personnes qui entrent dans votre point de vente</span>
     </div>
 
     <div class="form-group">
       <label for="ventes">Nombre de ventes mensuelles actuelles</label>
-      <input type="number" id="ventes" name="ventes" placeholder="Ex: 100" min="0">
+      <input type="number" id="ventes" name="ventes" placeholder="Ex: 100" value="100" min="0">
       <span class="helper-text">Nombre de transactions réalisées par mois</span>
     </div>
 
     <div class="form-group">
       <label for="panier">Panier/ticket moyen actuel (€)</label>
-      <input type="number" id="panier" name="panier" placeholder="Ex: 50" min="0" step="0.01">
+      <input type="number" id="panier" name="panier" placeholder="Ex: 50" value="50" min="0" step="0.01">
       <span class="helper-text">Montant moyen dépensé par client</span>
     </div>
 
-    <button type="button" class="btn-calculate">Simuler mon chiffre d’affaires</button>
+    <div class="cgu-wrapper">
+      <label class="cgu-label">
+        <input type="checkbox" id="cgu-checkbox">
+        J’accepte les <a href="conditions.html" target="_blank" class="cgu-link">conditions d’utilisation</a> du simulateur AKAIRO
+      </label>
+      <p class="cgu-error" id="cgu-error" style="display: none;">
+        Veuillez accepter les conditions d’utilisation pour accéder à l’analyse.
+      </p>
+    </div>
+
+    <button type="button" class="btn-calculate" id="btn-simulate" disabled>
+      Simuler mon chiffre d’affaires
+    </button>
   </div>
 
   <div class="calculator-results" id="results" style="display: none;">
@@ -85,9 +97,9 @@
     </div>
 
     <div class="gain-mensuel">
-      <div class="gain-label">Gain mensuel</div>
-      <div class="gain-value" id="gain_mensuel">-</div>
-      <div class="gain-yearly-label">Soit <strong id="gain_annuel">-</strong> de CA additionnel espéré/an*</div>
+      <div class="gain-label">CA additionnel potentiel annuel HT</div>
+      <div class="gain-value" id="gain_annuel">-</div>
+      <div class="gain-yearly-label">Soit <strong id="gain_mensuel">-</strong> de CA additionnel potentiel / mois</div>
     </div>
 
     <div class="pdf-action-container" style="text-align: center; margin-bottom: 32px;" data-html2canvas-ignore="true">
@@ -97,7 +109,7 @@
     </div>
 
     <div class="chart-section">
-      <h4 class="chart-title">Zone de Profit potentiel (Projection Cumulée sur 3 ans)</h4>
+      <h4 class="chart-title">CA additionnel potentiel cumulé sur 3 ans</h4>
       <div class="chart-container">
         <canvas id="roiChart"></canvas>
       </div>

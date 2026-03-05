@@ -1,4 +1,4 @@
-// ==========================================
+﻿// ==========================================
 // 1. VARIABLES GLOBALES & FONCTIONS
 // ==========================================
 
@@ -90,7 +90,7 @@ function calculerImpactCA() {
     badgeCA.textContent = '+' + pctCA.toFixed(1).replace('.', ',') + '%';
 
   // === MISE À JOUR DU GRAPHIQUE ===
-  updateChart(caAvant, caApres);
+  updateChart(deltaCA);
 
   // Affichage de la section résultats
   const resultsSection = document.getElementById('results');
@@ -130,50 +130,77 @@ function calculerImpactCA() {
 }
 
 // === LOGIQUE GRAPHIQUE ===
-function updateChart(caAvantMensuel, caApresMensuel) {
+function updateChart(deltaCA) {
   const canvas = document.getElementById('roiChart');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  
-  // Projection annuelle
-  const caAvantAn = caAvantMensuel * 12;
-  const caApresAn = caApresMensuel * 12;
-  
-  const dataSans = [0, caAvantAn, caAvantAn * 2, caAvantAn * 3];
-  const dataAvec = [0, caApresAn, caApresAn * 2, caApresAn * 3];
+
+  // 36 points : mois 0 à 36
+  const labels          = Array.from({ length: 37 }, (_, i) => i);
+  const data            = labels.map(n => deltaCA * n);
+  const pointRadii      = labels.map(n => (n === 12 || n === 24 || n === 36) ? 8 : 0);
+  const pointHoverRadii = labels.map(n => (n === 12 || n === 24 || n === 36) ? 10 : 6);
 
   if (roiChartInstance) roiChartInstance.destroy();
 
   roiChartInstance = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['Départ', 'Année 1', 'Année 2', 'Année 3'],
-      datasets: [
-        {
-          label: 'Situation Actuelle',
-          data: dataSans,
-          borderColor: '#999', borderWidth: 2, borderDash: [5,5], pointRadius: 3
-        },
-        {
-          label: 'Avec Écran AKAIRO',
-          data: dataAvec,
-          borderColor: '#DE0B19', backgroundColor: 'rgba(222, 11, 25, 0.1)',
-          borderWidth: 3, pointRadius: 5, pointBackgroundColor: '#FFF', pointBorderColor: '#DE0B19',
-          fill: '-1', tension: 0.3
-        }
-      ]
+      labels,
+      datasets: [{
+        label: 'Gain cumulé',
+        data,
+        borderColor: '#DE0B19',
+        backgroundColor: 'rgba(222, 11, 25, 0.15)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.3,
+        pointRadius: pointRadii,
+        pointHitRadius: 20,
+        pointHoverRadius: pointHoverRadii,
+        pointBackgroundColor: '#DE0B19',
+        pointBorderColor: '#FFF',
+        pointBorderWidth: 2
+      }]
     },
     options: {
-      responsive: true, maintainAspectRatio: false,
-      animation: {
-          duration: 1000 
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 1000 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: items => {
+              const n = items[0].dataIndex;
+              if (n === 12) return 'Mois 12 — 1 an';
+              if (n === 24) return 'Mois 24 — 2 ans';
+              if (n === 36) return 'Mois 36 — 3 ans';
+              return 'Mois ' + n;
+            },
+            label: item => ' ' + formatEuro(item.raw)
+          }
+        }
       },
-      plugins: { legend: { position: 'bottom' }, tooltip: { mode: 'index', intersect: false } },
-      scales: { y: { beginAtZero: true, ticks: { callback: v => v >= 1000 ? (v/1000) + ' k€' : v + ' €' } } }
+      scales: {
+        x: {
+          grid: { color: 'rgba(0,0,0,0.06)' },
+          ticks: {
+            callback: (val, i) => (i === 0 || i === 12 || i === 24 || i === 36) ? i : '',
+            maxRotation: 0
+          },
+          title: { display: true, text: 'Mois' }
+        },
+        y: {
+          beginAtZero: true,
+          min: 0,
+          grid: { color: 'rgba(0,0,0,0.06)' },
+          ticks: { callback: v => formatEuro(v) }
+        }
+      }
     }
   });
 }
-
 // === TÉLÉCHARGEMENT PDF AVEC BRANDING (METHODE CALQUE & NETTOYAGE) ===
 function downloadPDF() {
   const element = document.getElementById('results');
@@ -275,6 +302,22 @@ document.addEventListener('DOMContentLoaded', function() {
   const btnCalculate = document.querySelector('.btn-calculate');
   if (btnCalculate) {
     btnCalculate.addEventListener('click', calculerImpactCA);
+  }
+
+  const checkbox    = document.getElementById('cgu-checkbox');
+  const btnSimulate = document.getElementById('btn-simulate');
+  const cguError    = document.getElementById('cgu-error');
+
+  if (checkbox && btnSimulate) {
+    checkbox.addEventListener('change', function() {
+      if (checkbox.checked) {
+        btnSimulate.disabled = false;
+        cguError.style.display = 'none';
+      } else {
+        btnSimulate.disabled = true;
+        cguError.style.display = 'block';
+      }
+    });
   }
 
   const btnDownload = document.querySelector('.btn-download-pdf');
