@@ -336,8 +336,19 @@
 .teaser-content h4 {
   font-size: 22px;
   color: #1A1A1A;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   font-weight: 700;
+}
+
+.teaser-content .teaser-subtitle {
+  font-size: 17px;
+  color: #333;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 16px;
 }
 
 .teaser-content p {
