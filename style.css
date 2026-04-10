@@ -1,13 +1,38 @@
 /* === CALCULATEUR ROI AKAIRO - Charte graphique conforme === */
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #F5F5F5;
+}
+
+.akairo-page-header {
+  width: 100%;
+  background: #FFFFFF;
+}
+
+.akairo-page-header-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.akairo-page-main {
+  padding: 32px 20px 48px;
+}
+
 .akairo-calculator-wrapper {
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 0 auto;
   padding: 40px;
   background: #FFFFFF;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-sizing: border-box;
 }
 
 .calculator-header {
@@ -439,6 +464,20 @@
 @media (max-width: 768px) {
   .results-grid, .benefits-list { grid-template-columns: 1fr; }
   .btn-download-pdf { width: 100% !important; }
+  .akairo-page-main { padding: 20px 12px 32px; }
+  .akairo-calculator-wrapper {
+    padding: 24px 16px;
+    border-radius: 10px;
+  }
+  .calculator-header {
+    margin-bottom: 28px;
+  }
+  .calculator-header h2 {
+    font-size: 26px;
+  }
+  .calculator-header .subtitle {
+    font-size: 16px;
+  }
 }
 /* === CORRECTIF RENDU PDF === */
 .pdf-mode {
